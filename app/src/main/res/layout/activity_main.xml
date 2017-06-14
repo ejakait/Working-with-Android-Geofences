@@ -8,23 +8,31 @@
     android:gravity="center">
 
 
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton"
+        android:textOff="Geofence Monitoring OFF"
+        android:textOn="Geofence Monitoring ON"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/starlocationmonitor"
         android:id="@+id/starLocationMonitor" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stargeofencemonitor"
-        android:id="@+id/starGeofenceMonitor"
-        android:layout_gravity="center_horizontal" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/stargeofencemonitor"-->
+        <!--android:id="@+id/starGeofenceMonitor"-->
+        <!--android:layout_gravity="center_horizontal" />-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/stopgeofencemonitor"
-        android:id="@+id/stopGeofenceMonitor"
-        android:layout_gravity="center_horizontal" />
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/stopgeofencemonitor"-->
+        <!--android:id="@+id/stopGeofenceMonitor"-->
+        <!--android:layout_gravity="center_horizontal" />-->
 </LinearLayout>

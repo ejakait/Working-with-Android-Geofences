@@ -15,6 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
@@ -64,18 +67,30 @@ public class MainActivity extends AppCompatActivity implements
                 starLocationMonitor();
             }
         });
-        stargeofencemonitor = (Button) findViewById(R.id.starGeofenceMonitor);
-        stargeofencemonitor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                starGeofenceMonitor();
-            }
-        });
-        stopgeofencemonitor = (Button) findViewById(R.id.stopGeofenceMonitor);
-        stopgeofencemonitor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopGeofenceMonitor();
+//        stargeofencemonitor = (Button) findViewById(R.id.starGeofenceMonitor);
+//        stargeofencemonitor.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                starGeofenceMonitor();
+//            }
+//        });
+//        stopgeofencemonitor = (Button) findViewById(R.id.stopGeofenceMonitor);
+//        stopgeofencemonitor.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stopGeofenceMonitor();
+//            }
+//        });
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    starGeofenceMonitor();
+                    Toast toast = Toast.makeText(getApplicationContext(),"Started Geofence  Monitoring",Toast.LENGTH_SHORT);
+
+                } else {
+                    stopGeofenceMonitor();
+                }
             }
         });
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},1234);
@@ -126,8 +141,10 @@ public class MainActivity extends AppCompatActivity implements
 
 
     private void starLocationMonitor() {
-
         Log.d(LOG_TAG, "starLocationMonitor");
+        Toast toast = Toast.makeText(getApplicationContext(),"Started Location Monitoring",Toast.LENGTH_SHORT);
+        toast.show();
+
         try {
             LocationRequest locationRequest = LocationRequest.create()
                     .setInterval(10000)
@@ -169,7 +186,8 @@ public class MainActivity extends AppCompatActivity implements
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (!googleApiClient.isConnected()) {
-            Log.d(LOG_TAG, "GoogleApiClient is not Conectec");
+            Log.d(LOG_TAG, "GoogleApiClient is not Connected");
+
         } else {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
@@ -187,8 +205,14 @@ public class MainActivity extends AppCompatActivity implements
                         public void onResult(@NonNull Status status) {
                             if (status.isSuccess()) {
                                 Log.d(LOG_TAG, "Successfully add geofencingRequest");
+                                Toast GeoReqSucc = Toast.makeText(getApplicationContext(),"Successfully added geofencingRequest",Toast.LENGTH_SHORT);
+                                GeoReqSucc.show();
+
                             } else {
                                 Log.d(LOG_TAG, "Failed to add geofencingRequest" + status.getStatus());
+                                Toast GeoReqFail = Toast.makeText(getApplicationContext(),"Failed to add geofencingRequest"+status.getStatus(),Toast.LENGTH_SHORT);
+                                GeoReqFail.show();
+
 
                             }
                         }
