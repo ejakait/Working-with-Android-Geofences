@@ -3,9 +3,11 @@ package com.andresdavid.testgeofencinggideoracle;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    protected LocationManager locationManager;
 
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -67,33 +70,19 @@ public class MainActivity extends AppCompatActivity implements
                 starLocationMonitor();
             }
         });
-//        stargeofencemonitor = (Button) findViewById(R.id.starGeofenceMonitor);
-//        stargeofencemonitor.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                starGeofenceMonitor();
-//            }
-//        });
-//        stopgeofencemonitor = (Button) findViewById(R.id.stopGeofenceMonitor);
-//        stopgeofencemonitor.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stopGeofenceMonitor();
-//            }
-//        });
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     starGeofenceMonitor();
-                    Toast toast = Toast.makeText(getApplicationContext(),"Started Geofence  Monitoring",Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Started Geofence  Monitoring", Toast.LENGTH_SHORT);
 
                 } else {
                     stopGeofenceMonitor();
                 }
             }
         });
-        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},1234);
+        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1234);
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -142,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void starLocationMonitor() {
         Log.d(LOG_TAG, "starLocationMonitor");
-        Toast toast = Toast.makeText(getApplicationContext(),"Started Location Monitoring",Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), "Started Location Monitoring", Toast.LENGTH_SHORT);
         toast.show();
 
         try {
