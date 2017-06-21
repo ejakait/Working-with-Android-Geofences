@@ -49,13 +49,12 @@ public class MainActivity extends AppCompatActivity implements
     private float RADIO = 100;
 
 
-    private Button starLocationMonitor, stargeofencemonitor, stopgeofencemonitor;
+    private Button starLocationMonitor;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    protected LocationManager locationManager;
 
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -87,10 +86,10 @@ public class MainActivity extends AppCompatActivity implements
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        buildGoogleApiCliente();
+        buildGoogleApiClient();
     }
 
-    protected synchronized void buildGoogleApiCliente() {
+    protected synchronized void buildGoogleApiClient() {
         int response = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
         if (response != ConnectionResult.SUCCESS)
             GoogleApiAvailability.getInstance().getErrorDialog(this, response, 1).show();
